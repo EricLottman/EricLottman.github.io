@@ -30,9 +30,16 @@
         }
         .cart-item {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             padding: 10px;
             border-bottom: 1px solid #ccc;
+        }
+        .cart-item textarea, .cart-item input {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .file-input {
+            margin-top: 10px;
         }
         button {
             background: #ff4757;
@@ -55,7 +62,12 @@
             cart.forEach((item, index) => {
                 let div = document.createElement("div");
                 div.classList.add("cart-item");
-                div.innerHTML = `<span>${item}</span> <button onclick="removeItem(${index})">Remove</button>`;
+                div.innerHTML = `
+                    <span>${item}</span>
+                    <textarea placeholder="Describe your customization..."></textarea>
+                    <input type="file" class="file-input" multiple accept="image/*" onchange="limitFiles(this, ${index})">
+                    <button onclick="removeItem(${index})">Remove</button>
+                `;
                 cartContainer.appendChild(div);
             });
         }
@@ -68,6 +80,12 @@
         function clearCart() {
             localStorage.removeItem("cart");
             loadCart();
+        }
+        function limitFiles(input, index) {
+            if (input.files.length > 5) {
+                alert("You can upload up to 5 files only.");
+                input.value = "";
+            }
         }
         window.onload = loadCart;
     </script>
