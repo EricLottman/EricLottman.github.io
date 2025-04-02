@@ -41,6 +41,7 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
         section {
             padding: 50px 20px;
@@ -85,10 +86,8 @@
         let cart = [];
         function addToCart(product) {
             cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
             alert(product + " added to cart!");
-        }
-        function viewCart() {
-            alert("Your Cart: " + (cart.length ? cart.join(", ") : "is empty"));
         }
     </script>
 </head>
@@ -103,7 +102,7 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <button class="cart" onclick="viewCart()">🛒 View Cart</button>
+        <a href="cart.html" class="cart">🛒 View Cart</a>
     </header>
     
     <section id="about">
@@ -129,7 +128,7 @@
     
     <section id="customization">
         <h2>Customization</h2>
-        <p>Choose your fabric, design, and style to create your perfect outfit.</p>
+        <p>Choose your color, design, and style to create your perfect outfit.</p>
     </section>
     
     <section id="contact">
